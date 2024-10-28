@@ -26,7 +26,7 @@ jobs:
         run: mvn clean install
         working-directory: simple-api
 
-    build-and-push-docker-image:
+  build-and-push-docker-image:
     needs: test-backend
     runs-on: ubuntu-22.04
     steps:
@@ -55,5 +55,4 @@ jobs:
         with:
           context: ./http-server
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/tp-devops-http-server:latest
-          push: ${{ github.ref == 'refs/heads/main' }}
           push: ${{ github.ref == 'refs/heads/main' }}
