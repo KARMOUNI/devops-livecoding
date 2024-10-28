@@ -25,6 +25,13 @@ jobs:
       - name: Build and test with Maven
         run: mvn clean install
         working-directory: simple-api
+      - name: Build and test with
+        run: mvn -B verify sonar:sonar 
+         -Dsonar.projectKey=KARMOUNI_devops-livecoding
+         -Dsonar.organization=karmouni 
+         -Dsonar.host.url=https://sonarcloud.io 
+         -Dsonar.login=${{ secrets.SONAR_TOKEN }}  --file ./simple-api/pom.xml
+
 
   build-and-push-docker-image:
     needs: test-backend
