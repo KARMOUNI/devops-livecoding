@@ -17,11 +17,11 @@ Quality Gate - SonarCloud Analysis
 Run SonarCloud Analysis: Configured in main.yml to analyze code quality on each commit. Uses a specific project and organization key.
 Questions and Answers
 
-❓What are testcontainers?
+#What are testcontainers?
  Testcontainers are Java libraries that allow integration tests to run in lightweight, throwaway Docker containers. For this TP, Testcontainers were used to spin up a PostgreSQL container to verify database integration. here's an example of testcontainers in the pom.xml:
 
-image
-❓ documenting the First CI with backend test :
+
+# documenting the First CI with backend test :
  here's my snippet of code for the main.yaml :
 
 name: CI Workflow
@@ -50,15 +50,15 @@ uses: actions/checkout@v2
         run: mvn clean verify
  PS: it's validated
 
-image image
-❓ Why did we use secured variables?
+ 
+# Why did we use secured variables?
   Secured variables (GitHub Secrets) are used to protect sensitive information, such as DockerHub credentials, from being exposed in the public repository. They ensure that credentials are only accessible within the GitHub Actions environment.
 
-image
-❓ Why did we use the needs: build-and-test on the job?
+
+# Why did we use the needs: build-and-test on the job?
   The needs: build-and-test directive ensures that the Docker image is only built and pushed if the build-and-test job completes successfully. This dependency prevents deploying an untested or failed build.
 
-❓ For what purpose do we need to push Docker images?
+# For what purpose do we need to push Docker images?
  Pushing Docker images to a repository (like DockerHub) allows for easy deployment and version control of the application. Once an image is built, it can be reused across environments, ensuring consistency.
 
 image
@@ -122,14 +122,14 @@ uses: actions/checkout@v2
           push: ${{ github.ref == 'refs/heads/main' }}
 ️ PS: It's validated
 
-image
-❓ What is a Quality Gate?
+
+# What is a Quality Gate?
   A Quality Gate is a set of conditions that code must meet to be considered production-ready. Using SonarCloud, the Quality Gate checks code metrics such as coverage, bugs, and code smells to ensure maintainability and security.
 
-❓ Explain the Quality Gate configuration used
+# Explain the Quality Gate configuration used
   The Quality Gate in SonarCloud was configured to check metrics such as code coverage, maintainability, reliability, and security. If any thresholds are not met, the build fails, enforcing a standard for code quality.
 
-❓Documenting the quality gate configuration.
+#Documenting the quality gate configuration.
   here's my snippet of code for the main.yaml :
 
 name: CI Workflow
@@ -166,7 +166,7 @@ uses: actions/checkout@v2
           -Dsonar.login=${{ secrets.SONAR_TOKEN }}  --file ./simple-api/pom.xml
 
 
-build-and-push-docker-image:
+build-and-push-docker-:
 needs: build-and-test
 runs-on: ubuntu-22.04
 steps:
@@ -199,11 +199,11 @@ steps:
           push: ${{ github.ref == 'refs/heads/main' }}
   PS: It's Validated
 
-image
+
 in SonarCloud:
 
-image
-Split Pipelines (I did it and you already checked it )
+
+Split Pipelines 
 The pipeline is split into two jobs:
 
 test-backend: Runs on develop and main branches for tests only.
